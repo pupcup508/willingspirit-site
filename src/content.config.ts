@@ -9,6 +9,8 @@ const animals = defineCollection({
     species: z.string().default('Dog'),
     status: z.enum(['Available for adoption', 'In foster care', 'Adoption pending', 'Adopted', 'Sanctuary resident']),
     photo: z.string().optional(),
+    // Which part of the photo to keep when cropped into a card, e.g. "center 80%" to favor the bottom.
+    photoPosition: z.string().optional(),
     breed: z.string().optional(),
     age: z.string().optional(),
     sex: z.string().optional(),

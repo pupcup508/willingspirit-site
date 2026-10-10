@@ -3,12 +3,12 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props { animal: CollectionEntry<'animals'> }
 const { animal } = Astro.props;
-const { name, photo, status, breed, age, species } = animal.data;
+const { name, photo, photoPosition, status, breed, age, species } = animal.data;
 ---
 
 <article class="card">
   <a class="stretch" href={`/animals/${animal.id}/`}>
-    {photo ? <img src={photo} alt={`${name}, a ${breed ?? species}`} loading="lazy" /> : <div class="placeholder" aria-hidden="true">🐾</div>}
+    {photo ? <img src={photo} alt={`${name}, a ${breed ?? species}`} loading="lazy" style={photoPosition && `object-position: ${photoPosition}`} /> : <div class="placeholder" aria-hidden="true">🐾</div>}
     <div class="card-body">
       <span class:list={['tag', { 'tag-good': status === 'Available for adoption' }]}>{status}</span>
       <h3>{name}</h3>

@@ -20,6 +20,7 @@ content:
         options:
           values: [Available for adoption, In foster care, Adoption pending, Adopted, Sanctuary resident]
       - { name: photo, label: Photo, type: image }
+      - { name: photoPosition, label: "Photo crop position", type: string, description: "Optional. e.g. 'center 80%' keeps more of the bottom of the photo in the card" }
       - { name: species, label: Species, type: string, default: Dog }
       - { name: breed, label: Breed, type: string }
       - { name: age, label: Age, type: string, description: "e.g. About 2 years" }
