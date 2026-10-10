@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import AnimalCard from '../../components/AnimalCard.astro';
+import { getAnimals } from '../../lib/content';
+
+const animals = await getAnimals();
+const current = animals.filter((a) => a.data.status !== 'Adopted');
+const adopted = animals.filter((a) => a.data.status === 'Adopted');
+---
+
+<Base title="Meet the Animals" description="Meet the animals in Willing Spirit Animal Sanctuary's care.">
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Meet the animals</p>
+      <h1>Every one of them has a story</h1>
+      <p class="lead">These are the animals currently in our care. Each one is learning that people can be safe.</p>
+      {current.length > 0 ? (
+        <div class="grid">{current.map((animal) => <AnimalCard animal={animal} />)}</div>
+      ) : (
+        <p class="empty">Animal profiles are coming soon!</p>
+      )}
+    </div>
+  </section>
+  {adopted.length > 0 && (
+    <section class="section section-alt">
+      <div class="wrap">
+        <h2>Happy tails 🏡</h2>
+        <p>Animals who found their forever homes.</p>
+        <div class="grid">{adopted.map((animal) => <AnimalCard animal={animal} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>

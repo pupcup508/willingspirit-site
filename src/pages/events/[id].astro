@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatEventDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events', ({ data }) => import.meta.env.DEV || !data.draft);
+  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props;
+const { Content } = await render(event);
+const { title, image, summary, time, location } = event.data;
+---
+
+<Base title={title} description={summary} image={image}>
+  <section class="section">
+    <div class="narrow prose">
+      <p><a href="/events/">← All events</a></p>
+      <p class="eyebrow">{formatEventDate(event.data)}{time && ` · ${time}`}</p>
+      <h1>{title}</h1>
+      {location && <p class="lead">📍 {location}</p>}
+      {image && <img src={image} alt="" />}
+      <Content />
+    </div>
+  </section>
+</Base>

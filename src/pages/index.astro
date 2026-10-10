@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import AnimalCard from '../components/AnimalCard.astro';
+import EventCard from '../components/EventCard.astro';
+import { getAnimals, getEvents } from '../lib/content';
+
+const animals = await getAnimals();
+const featured = (animals.some((a) => a.data.featured) ? animals.filter((a) => a.data.featured) : animals).slice(0, 3);
+const { upcoming } = await getEvents();
+---
+
+<Base>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">Rescue • Heal • Connect</p>
+        <h1>Every animal deserves a second chance.</h1>
+        <p class="lead">Willing Spirit Animal Sanctuary rescues vulnerable animals, gives them the care and training they need to heal, and is working toward a future where rescued animals help children who have experienced trauma heal too.</p>
+        <div class="btn-row">
+          <a class="btn" href="/donate/">Donate</a>
+          <a class="btn btn-outline" href="/get-involved/">How you can help</a>
+                  </div>
+      </div>
+      <img class="hero-logo" src="/images/logo.jpg" alt="Willing Spirit Animal Sanctuary logo: children hugging a dog, cat, horse, donkey, cow, goat and pig at sunset on a farm." width="420" height="420" />
+    </div>
+  </section>
+
+  {upcoming.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Coming up</p>
+        <h2>Join us</h2>
+        <div class="grid">
+          {upcoming.slice(0, 3).map((event) => <EventCard event={event} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Ways to help today</p>
+      <h2>Small acts, second chances</h2>
+      <div class="grid">
+        <div class="card"><div class="card-body">
+          <h3>🎁 Donate items</h3>
+          <p>Clean, giftable goods for our Thrift Your Gift holiday market turn directly into care for animals.</p>
+          <a href="/events/">See what we accept →</a>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>🦴 Send supplies</h3>
+          <p>Food, treats, crates, leashes and cleaning supplies keep our foster animals healthy and comfortable.</p>
+          <a href="/get-involved/#supplies">Supply list →</a>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>🤝 Volunteer</h3>
+          <p>Help with events, collecting donations, transport, or spreading the word to friends and neighbors.</p>
+          <a href="/get-involved/#volunteer">Get involved →</a>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Meet the animals</p>
+      <h2>Who we're caring for</h2>
+      {featured.length > 0 ? (
+        <div class="grid">{featured.map((animal) => <AnimalCard animal={animal} />)}</div>
+      ) : (
+        <p class="empty">Animal profiles are coming soon. Check back to meet our foster pups!</p>
+      )}
+      <p style="margin-top:1.5rem"><a class="btn btn-outline" href="/animals/">See all animals</a></p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="narrow center">
+      <p class="eyebrow">Our vision</p>
+      <h2>Both the child and the animal deserve a second chance.</h2>
+      <p class="lead">We dream of a place where rescued animals, once healed, become gentle partners for children in foster care — a place where a child who has known hardship can sit beside an animal that has learned to trust again.</p>
+      <a href="/about/">Read our story →</a>
+    </div>
+  </section>
+</Base>

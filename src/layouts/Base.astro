@@ -1,0 +1,93 @@
+---
+import settings from '../data/settings.json';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = 'Willing Spirit Animal Sanctuary rescues vulnerable animals and gives them a second chance — with a vision of connecting rescued animals and children who have experienced trauma.', image = '/images/logo.jpg' } = Astro.props;
+const fullTitle = title ? `${title} · Willing Spirit Animal Sanctuary` : 'Willing Spirit Animal Sanctuary · Rescue • Heal • Connect';
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: '/about/', label: 'Our Story' },
+  { href: '/animals/', label: 'Meet the Animals' },
+  { href: '/events/', label: 'Events' },
+  { href: '/get-involved/', label: 'Get Involved' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    {settings.announcement && (
+      <div class="announce"><a href="/events/">{settings.announcement}</a></div>
+    )}
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">
+          <img src="/images/logo.jpg" alt="" width="52" height="52" />
+          <span>Willing Spirit<small>Animal Sanctuary</small></span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="menu" aria-label="Main">
+            {nav.map((item) => (
+            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+          ))}
+          <a class="btn btn-small" href="/donate/">Donate</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <p class="footer-brand">Willing Spirit Animal Sanctuary</p>
+          <p class="motto">Rescue • Heal • Connect</p>
+          <p>{settings.location}</p>
+        </div>
+        <div>
+          <p><a href={`mailto:${settings.email}`}>{settings.email}</a></p>
+          {settings.phone && <p>{settings.phone}</p>}
+          <p class="socials">
+            {settings.facebook && <a href={settings.facebook}>Facebook</a>}
+            {settings.instagram && <a href={settings.instagram}>Instagram</a>}
+          </p>
+        </div>
+      </div>
+      <p class="wrap fine">© {new Date().getFullYear()} Willing Spirit Animal Sanctuary. Both the child and the animal deserve a second chance.</p>
+    </footer>
+    <script>
+      const toggle = document.querySelector('.menu-toggle');
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open));
+        document.getElementById('site-nav')?.classList.toggle('open', open);
+      });
+    </script>
+  </body>
+</html>

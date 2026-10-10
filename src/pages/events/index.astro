@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import EventCard from '../../components/EventCard.astro';
+import { getEvents } from '../../lib/content';
+
+const { upcoming, past } = await getEvents();
+---
+
+<Base title="Events" description="Fundraisers and community events supporting Willing Spirit Animal Sanctuary.">
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Events</p>
+      <h1>Come say hello</h1>
+      {upcoming.length > 0 ? (
+        <div class="grid">{upcoming.map((event) => <EventCard event={event} />)}</div>
+      ) : (
+        <p class="empty">No upcoming events right now. Check back soon!</p>
+      )}
+    </div>
+  </section>
+  {past.length > 0 && (
+    <section class="section section-alt">
+      <div class="wrap">
+        <h2>Past events</h2>
+        <div class="grid">{past.map((event) => <EventCard event={event} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>

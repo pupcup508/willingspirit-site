@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+
+const money = [
+  { label: 'Venmo', href: settings.venmo },
+  { label: 'PayPal', href: settings.paypal },
+  { label: 'Cash App', href: settings.cashapp },
+].filter((m) => m.href);
+---
+
+<Base title="Donate" description="Help Willing Spirit Animal Sanctuary care for rescued animals. Shop our Amazon wishlist or give directly.">
+  <section class="section">
+    <div class="narrow">
+      <p class="eyebrow">Donate</p>
+      <h1>Give a rescued animal a second chance</h1>
+      <p class="lead">Every gift goes straight to food, vet care, and supplies for the animals in our care. Thank you for being part of their story. 🐾</p>
+
+      <div class="donate-options">
+        {settings.amazonWishlist && (
+          <a class="donate-option" href={settings.amazonWishlist}>
+            <span class="donate-icon" aria-hidden="true">🎁</span>
+            <span><strong>Shop our Amazon wishlist</strong><small>Food, toys, and supplies shipped right to us</small></span>
+          </a>
+        )}
+        {money.map((m) => (
+          <a class="donate-option" href={m.href}>
+            <span class="donate-icon" aria-hidden="true">💚</span>
+            <span><strong>Give with {m.label}</strong><small>Any amount helps</small></span>
+          </a>
+        ))}
+        <a class="donate-option" href="/events/">
+          <span class="donate-icon" aria-hidden="true">🛍️</span>
+          <span><strong>Donate items to Thrift Your Gift</strong><small>Our holiday thrift market this December</small></span>
+        </a>
+      </div>
+
+      {!settings.amazonWishlist && money.length === 0 && (
+        <p class="notice">Online giving links are coming soon. In the meantime, <a href={`mailto:${settings.email}?subject=Donating`}>email us</a>. We'd love to hear from you.</p>
+      )}
+
+      <p class="meta">
+        <strong>Please note:</strong> Willing Spirit Animal Sanctuary's nonprofit status is still being finalized, so donations are not
+        tax-deductible at this time and we can't provide tax receipts yet. We're so grateful to everyone who gives anyway.
+      </p>
+    </div>
+  </section>
+</Base>

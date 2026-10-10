@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getAnimals } from '../../lib/content';
+import settings from '../../data/settings.json';
+
+export async function getStaticPaths() {
+  const animals = await getAnimals();
+  return animals.map((animal) => ({ params: { id: animal.id }, props: { animal } }));
+}
+
+const { animal } = Astro.props;
+const { Content } = await render(animal);
+const { name, photo, status, breed, age, sex, species, adoptVia, adoptLink, draft } = animal.data;
+const facts = [['Species', species], ['Breed', breed], ['Age', age], ['Sex', sex], ['Status', status]].filter(([, v]) => v);
+---
+
+<Base title={name} description={`Meet ${name}, ${status.toLowerCase()} with Willing Spirit Animal Sanctuary.`} image={photo}>
+  <section class="section">
+    <div class="wrap">
+      {draft && <p class="notice">Draft: only visible in local preview.</p>}
+      <p><a href="/animals/">← All animals</a></p>
+      <div class="profile">
+        {photo ? <img class="profile-photo" src={photo} alt={name} /> : <div class="card"><div class="placeholder" aria-hidden="true">🐾</div></div>}
+        <div class="prose">
+          <h1>{name}</h1>
+          <dl class="facts">{facts.map(([k, v]) => <><dt>{k}</dt><dd>{v}</dd></>)}</dl>
+          <Content />
+          {status === 'Available for adoption' && (
+            <div class="notice">
+              <strong>Interested in adopting {name}?</strong>{' '}
+              {adoptVia ? <>Adoptions are handled by {adoptLink ? <a href={adoptLink}>{adoptVia}</a> : adoptVia}.</> : <>Email us at <a href={`mailto:${settings.email}?subject=${encodeURIComponent('Adopting ' + name)}`}>{settings.email}</a>.</>}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

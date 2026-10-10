@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+
+const mail = (subject: string) => `mailto:${settings.email}?subject=${encodeURIComponent(subject)}`;
+---
+
+<Base title="Get Involved" description="Donate, volunteer, or send supplies to help Willing Spirit Animal Sanctuary's rescued animals.">
+  <section class="section">
+    <div class="narrow prose">
+      <p class="eyebrow">Get involved</p>
+      <h1>Help an animal heal</h1>
+      <p class="lead">Every bag of food, every volunteer hour, and every person who shares our story helps a rescued animal get the second chance they deserve.</p>
+
+      <h2 id="donate">Donate</h2>
+      <p>Shop our Amazon wishlist or give any amount online. Every bit goes to the animals.</p>
+      <p><a class="btn" href="/donate/">Ways to donate</a></p>
+
+      <h2 id="supplies">Send supplies</h2>
+      <p>Our foster animals always need:</p>
+      <ul>
+        <li>Quality dog food and training treats</li>
+        <li>Puppy pads, poop bags, and pet-safe cleaning supplies</li>
+        <li>Leashes, collars, harnesses, and crates</li>
+        <li>Durable toys, chews, and blankets</li>
+        <li>Gift cards to pet-supply stores or local veterinarians</li>
+      </ul>
+      {settings.amazonWishlist
+        ? <p><a class="btn" href={settings.amazonWishlist}>Shop our Amazon wishlist</a></p>
+        : <p><a href={mail('Donating supplies')}>Email us</a> to arrange a drop-off.</p>}
+
+      <h2 id="volunteer">Volunteer</h2>
+      <p>We'd love help with:</p>
+      <ul>
+        <li>Collecting, sorting, and pricing items for Thrift Your Gift</li>
+        <li>Event setup, sales, and cleanup</li>
+        <li>Transporting animals to vet appointments</li>
+        <li>Photography and social media</li>
+        <li>Connecting us with local businesses, churches, and community groups</li>
+      </ul>
+      <p><a class="btn" href={settings.volunteerForm || mail('I want to volunteer')}>Sign up to volunteer</a></p>
+
+      <h2>Spread the word</h2>
+      <p>Follow us, share our animals' stories, and tell a friend. It costs nothing and helps more than you'd think.</p>
+    </div>
+  </section>
+</Base>

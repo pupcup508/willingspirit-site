@@ -1,0 +1,66 @@
+# Pages CMS (https://pagescms.org): gives Tess simple forms to edit the site.
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: animals
+    label: Animals
+    type: collection
+    path: src/content/animals
+    filename: "{fields.name}.md"
+    view:
+      fields: [name, status, draft]
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - name: status
+        label: Status
+        type: select
+        required: true
+        options:
+          values: [Available for adoption, In foster care, Adoption pending, Adopted, Sanctuary resident]
+      - { name: photo, label: Photo, type: image }
+      - { name: species, label: Species, type: string, default: Dog }
+      - { name: breed, label: Breed, type: string }
+      - { name: age, label: Age, type: string, description: "e.g. About 2 years" }
+      - { name: sex, label: Sex, type: string }
+      - { name: adoptVia, label: "Adoptions handled by", type: string, description: "Name of the rescue that handles this animal's adoptions (leave blank to use our email)" }
+      - { name: adoptLink, label: "Adoption link", type: string, description: "Link to that rescue's adoption page or application" }
+      - { name: featured, label: "Feature on home page", type: boolean }
+      - { name: draft, label: "Draft (hide from website)", type: boolean }
+      - { name: body, label: Story, type: rich-text }
+
+  - name: events
+    label: Events
+    type: collection
+    path: src/content/events
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date, draft]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true, description: "Used for sorting. Past events move to 'Past events' automatically." }
+      - { name: dateText, label: "Date text (optional)", type: string, description: "Shown instead of the date, e.g. 'Early December, date TBA'" }
+      - { name: time, label: Time, type: string, description: "e.g. 9am – 2pm" }
+      - { name: location, label: Location, type: string }
+      - { name: image, label: Image, type: image }
+      - { name: summary, label: "Short summary", type: text, required: true }
+      - { name: draft, label: "Draft (hide from website)", type: boolean }
+      - { name: body, label: Details, type: rich-text }
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/data/settings.json
+    fields:
+      - { name: announcement, label: "Banner announcement", type: string, description: "Shown at the top of every page. Leave blank to hide." }
+      - { name: email, label: "Contact email", type: string }
+      - { name: phone, label: Phone, type: string }
+      - { name: location, label: Location, type: string }
+      - { name: facebook, label: "Facebook link", type: string }
+      - { name: instagram, label: "Instagram link", type: string }
+      - { name: amazonWishlist, label: "Amazon wishlist link", type: string }
+      - { name: venmo, label: "Venmo link", type: string, description: "e.g. https://venmo.com/u/yourname (leave blank to hide)" }
+      - { name: paypal, label: "PayPal link", type: string, description: "e.g. https://paypal.me/yourname (leave blank to hide)" }
+      - { name: cashapp, label: "Cash App link", type: string, description: "e.g. https://cash.app/$yourname (leave blank to hide)" }
+      - { name: volunteerForm, label: "Volunteer form link", type: string, description: "e.g. a Google Form" }
