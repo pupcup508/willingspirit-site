@@ -16,9 +16,10 @@ npm run build      # production build into dist/
 |---|---|
 | Animal profiles | `src/content/animals/*.md` |
 | Events | `src/content/events/*.md` |
-| Email, socials, banner, Amazon wishlist, Venmo/PayPal/Cash App links | `src/data/settings.json` |
+| Email, socials, banner, Amazon wishlist, Venmo/PayPal/Cash App links, kennel fund goal | `src/data/settings.json` |
 | Photos | `public/images/` |
-| Page text (Our Story, Get Involved, …) | `src/pages/*.astro` |
+| Page text (Our Story, Founder, Current Efforts, …) | `src/pages/*.astro` |
+| Kennel-building milestones | `src/pages/current-efforts.astro` |
 | Colors and fonts | `src/styles/global.css` |
 | No-code editing forms (Pages CMS) | `.pages.yml` |
 | Printable flyer with donate QR code | `/flyer/` (`src/pages/flyer.astro`) |
@@ -34,6 +35,16 @@ Set `draft: true` on an animal or event to hide it from the live site.
 3. **Pages CMS (optional):** sign in at https://app.pagescms.org with GitHub to get phone-friendly forms for Animals, Events and Site settings.
 4. **Domain (later, ~$8):** register `willingspiritanimalsanctuary.org` at Porkbun under Tess's account, then in Cloudflare Pages → Custom domains add it and follow the DNS instructions. HTTPS is automatic.
 5. **Email (free):** use Porkbun's email forwarding to send `hello@willingspiritanimalsanctuary.org` to Tess's Gmail.
+
+## Photo privacy (GPS safeguard)
+
+Phone photos usually contain GPS coordinates. Two automatic safeguards strip all EXIF/GPS metadata (and shrink anything over 1600px):
+
+- **On every commit:** `.githooks/pre-commit` cleans any image you stage. It's enabled by `npm install` (`prepare` script). Check with `git config core.hooksPath` → `.githooks`.
+- **On every build:** `prebuild` cleans everything in `public/images/`, so the live site never serves location data.
+
+Run it by hand with `npm run strip-images`. HEIC photos are rejected; export them as JPEG first.
+Photos uploaded through Pages CMS skip the commit hook. The build still cleans them before they go live, but the original stays in GitHub history, so prefer adding photos locally.
 
 ## QR code flyers
 

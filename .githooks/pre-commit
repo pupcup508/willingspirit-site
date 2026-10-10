@@ -1,0 +1,6 @@
+#!/bin/sh
+# Strip GPS/EXIF metadata from any image being committed, then re-stage the cleaned file.
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -iE '\.(jpe?g|png|webp|heic|heif)$')
+[ -z "$files" ] && exit 0
+echo "$files" | tr '\n' '\0' | xargs -0 node scripts/strip-image-metadata.mjs || exit 1
+echo "$files" | tr '\n' '\0' | xargs -0 git add --

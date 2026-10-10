@@ -6,11 +6,12 @@ import { getEvents } from '../../lib/content';
 const { upcoming, past } = await getEvents();
 ---
 
-<Base title="Events" description="Fundraisers and community events supporting Willing Spirit Animal Sanctuary.">
+<Base title="Upcoming Events" description="Fundraisers and community events supporting Willing Spirit Animal Sanctuary.">
   <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Events</p>
+      <p class="eyebrow">Upcoming events</p>
       <h1>Come say hello</h1>
+      <p class="lead">Fundraisers and community events where you can meet us, shop for a cause, and help animals in need.</p>
       {upcoming.length > 0 ? (
         <div class="grid">{upcoming.map((event) => <EventCard event={event} />)}</div>
       ) : (

@@ -9,6 +9,8 @@ Find one-of-a-kind holiday gifts and decorations while giving rescued animals a 
 
 ## Donate items
 
+We would love any donations to help put this event on!
+
 We're collecting **clean, gently used, giftable items**, including:
 
 - Books
@@ -17,7 +19,7 @@ We're collecting **clean, gently used, giftable items**, including:
 - Accessories, jewelry, and handbags
 - New or like-new toys and games
 
-Please, no large furniture, damaged items, mattresses, or clothing that's stained or worn out. Email us to arrange a drop-off.
+Please, no large furniture, damaged items, mattresses, or clothing that's stained or worn out. [Contact us](/contact/) to arrange a drop-off.
 
 ## Volunteer
 

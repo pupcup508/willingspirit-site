@@ -55,7 +55,7 @@ content:
     path: src/data/settings.json
     fields:
       - { name: announcement, label: "Banner announcement", type: string, description: "Shown at the top of every page. Leave blank to hide." }
-      - { name: email, label: "Contact email", type: string }
+      - { name: email, label: "Contact email", type: string, description: "Leave blank to show 'coming soon'" }
       - { name: phone, label: Phone, type: string }
       - { name: location, label: Location, type: string }
       - { name: facebook, label: "Facebook link", type: string }
@@ -65,3 +65,5 @@ content:
       - { name: paypal, label: "PayPal link", type: string, description: "e.g. https://paypal.me/yourname (leave blank to hide)" }
       - { name: cashapp, label: "Cash App link", type: string, description: "e.g. https://cash.app/$yourname (leave blank to hide)" }
       - { name: volunteerForm, label: "Volunteer form link", type: string, description: "e.g. a Google Form" }
+      - { name: kennelGoal, label: "Kennel fund goal ($)", type: number, description: "Set above 0 to show a progress bar on Current Efforts" }
+      - { name: kennelRaised, label: "Kennel fund raised so far ($)", type: number }

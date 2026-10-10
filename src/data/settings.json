@@ -1,13 +1,15 @@
 {
-  "email": "hello@willingspiritanimalsanctuary.org",
+  "email": "",
   "phone": "",
   "location": "Jackson Springs, North Carolina",
   "facebook": "",
   "instagram": "",
-  "announcement": "Thrift Your Gift — our holiday thrift market is coming this December! Start setting aside items to donate.",
+  "announcement": "Thrift Your Gift \u2014 our holiday thrift market is coming this December! Start setting aside items to donate.",
   "amazonWishlist": "",
   "venmo": "",
   "paypal": "",
   "cashapp": "",
-  "volunteerForm": ""
+  "volunteerForm": "",
+  "kennelGoal": 0,
+  "kennelRaised": 0
 }

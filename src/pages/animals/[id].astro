@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getAnimals } from '../../lib/content';
-import settings from '../../data/settings.json';
+import { contactHref } from '../../lib/contact';
 
 export async function getStaticPaths() {
   const animals = await getAnimals();
@@ -29,7 +29,7 @@ const facts = [['Species', species], ['Breed', breed], ['Age', age], ['Sex', sex
           {status === 'Available for adoption' && (
             <div class="notice">
               <strong>Interested in adopting {name}?</strong>{' '}
-              {adoptVia ? <>Adoptions are handled by {adoptLink ? <a href={adoptLink}>{adoptVia}</a> : adoptVia}.</> : <>Email us at <a href={`mailto:${settings.email}?subject=${encodeURIComponent('Adopting ' + name)}`}>{settings.email}</a>.</>}
+              {adoptVia ? <>Adoptions are handled by {adoptLink ? <a href={adoptLink}>{adoptVia}</a> : adoptVia}.</> : <><a href={contactHref(`Adopting ${name}`)}>Get in touch with us</a>.</>}
             </div>
           )}
         </div>

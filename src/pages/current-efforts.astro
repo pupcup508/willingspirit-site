@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+
+// TODO(Tess): confirm the remaining steps and add photos of the building.
+const milestones = [
+  { done: true, title: 'Land for the sanctuary', text: 'Acres of land in Jackson Springs, NC, with room for the animals to heal and play.' },
+  { done: true, title: 'Home on the property', text: 'A house built on the land so someone is always nearby to care for the animals.' },
+  { done: true, title: 'Kennel building: roof and slab', text: 'The foundation and roof of our future kennel building are in place.' },
+  { done: false, title: 'Finishing the kennel building', text: 'Walls, kennel runs, and full heating and air conditioning, so every rescue has a safe, comfortable place to stay year-round.' },
+];
+
+const goal = Number(settings.kennelGoal) || 0;
+const raised = Number(settings.kennelRaised) || 0;
+const pct = goal ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
+const usd = (n: number) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+---
+
+<Base title="Our Current Efforts" description="Help Willing Spirit Animal Sanctuary finish building kennels for rescued animals. See where your money goes.">
+  <section class="section">
+    <div class="narrow prose">
+      <p class="eyebrow">Our current efforts</p>
+      <h1>Help us finish the kennels</h1>
+      <p class="lead">We're building a permanent, climate-controlled home for rescued animals. The roof and foundation are done, and we need your help to finish the rest.</p>
+
+      {goal > 0 && (
+        <div class="goal">
+          <p class="goal-numbers"><strong>{usd(raised)}</strong> raised of {usd(goal)} goal</p>
+          <div class="goal-bar" role="progressbar" aria-valuenow={pct} aria-valuemin="0" aria-valuemax="100" aria-label="Kennel fund progress"><span style={`width:${pct}%`}></span></div>
+        </div>
+      )}
+
+      <h2>Where we are</h2>
+      <ol class="milestones">
+        {milestones.map((m) => (
+          <li class:list={{ done: m.done }}>
+            <span class="milestone-mark" aria-hidden="true">{m.done ? '✓' : ''}</span>
+            <div><strong>{m.title}</strong>{m.done ? <span class="tag tag-good">Done</span> : <span class="tag">Needs funding</span>}<p>{m.text}</p></div>
+          </li>
+        ))}
+      </ol>
+
+      <h2>Where your money goes</h2>
+      <ul>
+        <li><strong>Finishing the kennel building</strong> so we can take in more animals who need us.</li>
+        <li><strong>Daily care</strong> for the dogs with us now: food, vet visits, vaccines, and medicine.</li>
+        <li><strong>Supplies</strong> like crates, bedding, leashes, and cleaning supplies.</li>
+      </ul>
+
+      <p class="btn-row" style="margin-top:2rem">
+        <a class="btn" href="/donate/">Donate</a>
+        <a class="btn btn-outline" href="/events/thrift-your-gift/">Thrift Your Gift</a>
+      </p>
+    </div>
+  </section>
+</Base>

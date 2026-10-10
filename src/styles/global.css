@@ -49,10 +49,11 @@ p { margin: 0 0 1em; }
 .menu-toggle { font: inherit; font-weight: 700; background: none; cursor: pointer; padding: .5rem .9rem; border: 2px solid var(--forest); border-radius: 999px; color: var(--forest); }
 .menu { display: none; position: absolute; right: 1.25rem; top: 100%; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: .75rem; gap: .25rem; min-width: 220px; box-shadow: 0 12px 30px rgb(0 0 0 / .12); }
 .menu.open { display: grid; }
-.menu a:not(.btn) { text-decoration: none; padding: .5rem .75rem; border-radius: 8px; font-weight: 600; }
+.menu a:not(.btn) { text-decoration: none; padding: .5rem .75rem; border-radius: 8px; font-weight: 600; white-space: nowrap; }
 .menu a[aria-current] { background: var(--cream); }
-@media (min-width: 900px) {
+@media (min-width: 1150px) {
   .menu-toggle { display: none; }
+  .menu a:not(.btn) { padding: .45rem .55rem; font-size: .97rem; }
   .menu { display: flex; align-items: center; position: static; padding: 0; border: 0; box-shadow: none; background: none; min-width: 0; }
 }
 
@@ -104,3 +105,17 @@ p { margin: 0 0 1em; }
 .donate-option strong { display: block; font-size: 1.15rem; color: var(--forest); }
 .donate-option small { color: var(--muted); font-size: .95rem; }
 .donate-icon { font-size: 1.8rem; }
+
+.goal { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1.5rem 0; }
+.goal-numbers { margin-bottom: .6rem; }
+.goal-numbers strong { font-family: var(--serif); font-size: 1.6rem; color: var(--forest); }
+.goal-bar { height: 14px; background: var(--cream); border-radius: 999px; overflow: hidden; }
+.goal-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--leaf), var(--forest)); border-radius: inherit; }
+.milestones { list-style: none; padding: 0; margin: 1rem 0 0; }
+.milestones li { display: flex; gap: 1rem; padding-bottom: 1.25rem; position: relative; }
+.milestones li:not(:last-child)::before { content: ''; position: absolute; left: 15px; top: 34px; bottom: 4px; width: 2px; background: var(--line); }
+.milestone-mark { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 2px dashed var(--sunset); display: grid; place-items: center; font-weight: 700; background: var(--paper); }
+.milestones li.done .milestone-mark { background: var(--forest); border: 2px solid var(--forest); color: var(--cream); }
+.milestones strong { margin-right: .6rem; }
+.milestones .tag { margin-bottom: 0; vertical-align: middle; }
+.milestones p { margin: .3rem 0 0; color: var(--muted); }

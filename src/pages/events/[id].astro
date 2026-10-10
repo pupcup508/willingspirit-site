@@ -16,7 +16,7 @@ const { title, image, summary, time, location } = event.data;
 <Base title={title} description={summary} image={image}>
   <section class="section">
     <div class="narrow prose">
-      <p><a href="/events/">← All events</a></p>
+      <p><a href="/events/">← Upcoming events</a></p>
       <p class="eyebrow">{formatEventDate(event.data)}{time && ` · ${time}`}</p>
       <h1>{title}</h1>
       {location && <p class="lead">📍 {location}</p>}

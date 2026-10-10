@@ -1,8 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import settings from '../data/settings.json';
-
-const mail = (subject: string) => `mailto:${settings.email}?subject=${encodeURIComponent(subject)}`;
+import { contactHref as mail } from '../lib/contact';
 ---
 
 <Base title="Get Involved" description="Donate, volunteer, or send supplies to help Willing Spirit Animal Sanctuary's rescued animals.">
@@ -27,7 +26,7 @@ const mail = (subject: string) => `mailto:${settings.email}?subject=${encodeURIC
       </ul>
       {settings.amazonWishlist
         ? <p><a class="btn" href={settings.amazonWishlist}>Shop our Amazon wishlist</a></p>
-        : <p><a href={mail('Donating supplies')}>Email us</a> to arrange a drop-off.</p>}
+        : <p><a href={mail('Donating supplies')}>Contact us</a> to arrange a drop-off.</p>}
 
       <h2 id="volunteer">Volunteer</h2>
       <p>We'd love help with:</p>

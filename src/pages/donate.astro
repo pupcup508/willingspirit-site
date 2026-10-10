@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import settings from '../data/settings.json';
+import { contactHref } from '../lib/contact';
 
 const money = [
   { label: 'Venmo', href: settings.venmo },
@@ -29,15 +30,18 @@ const money = [
             <span><strong>Give with {m.label}</strong><small>Any amount helps</small></span>
           </a>
         ))}
-        <a class="donate-option" href="/events/">
+        <a class="donate-option" href="/events/thrift-your-gift/">
           <span class="donate-icon" aria-hidden="true">🛍️</span>
-          <span><strong>Donate items to Thrift Your Gift</strong><small>Our holiday thrift market this December</small></span>
+          <span><strong>Help us put on Thrift Your Gift</strong><small>We would love any donations to put this event on! Giftable items, supplies, or a helping hand for our holiday thrift market this December. See what we need →</small></span>
         </a>
       </div>
 
       {!settings.amazonWishlist && money.length === 0 && (
-        <p class="notice">Online giving links are coming soon. In the meantime, <a href={`mailto:${settings.email}?subject=Donating`}>email us</a>. We'd love to hear from you.</p>
+        <p class="notice">Online giving links are coming soon. In the meantime, <a href={contactHref('Donating')}>reach out</a>. We'd love to hear from you.</p>
       )}
+
+      <h2>Where your money goes</h2>
+      <p>Every dollar goes toward feeding, sheltering, and caring for rescued animals, and toward finishing the kennel building that will let us take in more of them. <a href="/current-efforts/">See what we're working on →</a></p>
 
       <p class="meta">
         <strong>Please note:</strong> Willing Spirit Animal Sanctuary's nonprofit status is still being finalized, so donations are not

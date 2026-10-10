@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "willingspirit-site",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -7,13 +7,17 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/strip-image-metadata.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "strip-images": "node scripts/strip-image-metadata.mjs",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
   },
   "dependencies": {
     "astro": "^7.3.8",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@types/qrcode": "^1.5.6"

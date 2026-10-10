@@ -14,8 +14,10 @@ const path = Astro.url.pathname;
 
 const nav = [
   { href: '/about/', label: 'Our Story' },
-  { href: '/animals/', label: 'Meet the Animals' },
-  { href: '/events/', label: 'Events' },
+  { href: '/founder/', label: 'Our Founder' },
+  { href: '/animals/', label: 'Animals' },
+  { href: '/current-efforts/', label: 'Current Efforts' },
+  { href: '/events/', label: 'Upcoming Events' },
   { href: '/get-involved/', label: 'Get Involved' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -71,7 +73,7 @@ const nav = [
           <p>{settings.location}</p>
         </div>
         <div>
-          <p><a href={`mailto:${settings.email}`}>{settings.email}</a></p>
+          {settings.email ? <p><a href={`mailto:${settings.email}`}>{settings.email}</a></p> : <p><a href="/contact/">Contact us</a></p>}
           {settings.phone && <p>{settings.phone}</p>}
           <p class="socials">
             {settings.facebook && <a href={settings.facebook}>Facebook</a>}
