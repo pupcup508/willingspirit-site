@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "strip-images": "node scripts/strip-image-metadata.mjs",
-    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true",
+    "qr": "node scripts/make-qr.mjs"
   },
   "dependencies": {
     "astro": "^7.3.8",
